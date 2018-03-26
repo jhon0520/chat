@@ -1,45 +1,30 @@
+var express = require('express');
+var socket = require('socket.io');
 
+// App setup
+var app = express();
+var server = app.listen(4000, function(){
+    console.log('listening for requests on port 4000,');
+});
 
-function MinimizeFunction() {
+// Static files
+app.use(express.static('public'));
 
-    //alert("Hola");
+// Socket setup & pass server
+var io = socket(server);
+io.on('connection', (socket) => {
 
-    var x = document.getElementById('chat-list');
-    var y = document.getElementById('chat');
-    var z = document.getElementById('text-chat');
-    var q = document.getElementById('user-name');
-    if (x.style.visibility === 'hidden') {
-        x.style.visibility = 'visible';
-        z.style.visibility = 'visible';
-        y.style.height = '300px';
-        q.style.height = '7%';
+    console.log('made socket connection', socket.id);
 
-    } else {
-        x.style.visibility = 'hidden';
-        x.style.height = '267px;';
-        y.style.height = '0%';
-        z.style.visibility = 'hidden';
-        y.style.padding = '0% 0% 0% 0%;';
-        q.style.height = '50%';
+    // Handle chat event
+    socket.on('chat', function(data){
+        console.log(data);
+        io.sockets.emit('chat', data);
+    });
 
-    }
+    // Handle typing event
+    socket.on('typing', function(data){
+        socket.broadcast.emit('typing', data);
+    });
 
-
-}
-
-
-
-function render(data) {
-	var html = data.map(function(elem, index){
-    	return(`<div>
-        		 <strong>${elem.author}</strong>:
-                 <em>${elem.text}</em>
-        </div>`)
-    }).join(" ");
-    
-    document.getElementById('chat-list').innerHTML = html;
-}
-
-socket.on('chat-list', function(data) {
-	render(data);
 });

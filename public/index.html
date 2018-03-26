@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Chat MultiRed</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+        <link href="/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="Chat">
+            <h2>Chat</h2>
+            <div id="chat-window">
+                <div id="output"></div>
+                <div id="feedback"></div>
+            </div>
+            <input id="Usuario" type="text" placeholder="Nombre del usuario" />
+            <input id="Mensaje" type="text" placeholder="Mensaje" />
+            <button id="Enviar">Enviar Mensaje</button>
+        </div>
+
+    </body>
+    <script src="/chat.js"></script>
+</html>
