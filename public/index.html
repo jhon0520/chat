@@ -1,23 +1,60 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Chat MultiRed</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
-        <link href="/styles.css" rel="stylesheet" />
-    </head>
-    <body>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+    <link href="/index.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <!-- Chat principal -->
         <div id="Chat">
-            <h2>Chat</h2>
-            <div id="chat-window">
-                <div id="output"></div>
-                <div id="feedback"></div>
+                <h2>Chat</h2>
+                <div id="chat-window">
+                    <div id="output"></div>
+                    <div id="feedback"></div>
+                </div>
+                <input id="Usuario" type="text" placeholder="Nombre del usuario" />
+                <input id="Mensaje" type="text" placeholder="Mensaje" />
+                <button id="Enviar">Enviar Mensaje</button>
             </div>
-            <input id="Usuario" type="text" placeholder="Nombre del usuario" />
-            <input id="Mensaje" type="text" placeholder="Mensaje" />
-            <button id="Enviar">Enviar Mensaje</button>
+
+    <!-- Chat Pequeño -->
+    <div id="chat" class="chat">
+        <div id='user-name' class="username">jhon
+
+            <div class="button">
+                <button id="minimize" class="minimize">
+                    <i class="material-icons" onclick="MinimizeFunction()">remove</i>
+                </button>
+            </div>
+
         </div>
 
-    </body>
-    <script src="/chat.js"></script>
+        <div id="chat-list" class="chat-list">
+
+            <div id="output2"></div>
+            <div id="feedback2"></div>
+            
+        </div>
+        <div id="messages"></div>
+
+        <input id="Mensaje2" class="textarea" type="text" placeholder="Envía un mensaje" />
+        <button id="Enviar2">Enviar Mensaje</button>
+
+    </div>
+
+
+</body>
+
+<script src="/index.js"></script>
+
 </html>

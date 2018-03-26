@@ -1,0 +1,152 @@
+/* ----- Chat Principal ----- */
+
+body{
+    font-family: 'Nunito';
+}
+
+h2{
+    font-size: 18px;
+    padding: 10px 20px;
+    color: #575ed8;
+}
+
+#Chat{
+    max-width: 600px;
+    margin: 30px auto;
+    border: 1px solid #ddd;
+    box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
+    border-radius: 2px;
+}
+
+#chat-window{
+    height: 400px;
+    overflow: auto;
+    background: #f9f9f9;
+}
+
+#output p{
+    padding: 14px 0px;
+    margin: 0 20px;
+    border-bottom: 1px solid #e9e9e9;
+    color: #555;
+}
+
+#feedback p{
+    color: #aaa;
+    padding: 14px 0px;
+    margin: 0 20px;
+}
+
+#output strong{
+    color: #575ed8;
+}
+
+label{
+    box-sizing: border-box;
+    display: block;
+    padding: 10px 20px;
+}
+
+input{
+    padding: 10px 20px;
+    box-sizing: border-box;
+    background: #eee;
+    border: 0;
+    display: block;
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    font-family: Nunito;
+    font-size: 16px;
+}
+
+#Enviar{
+    background: #575ed8;
+    color: #fff;
+    font-size: 18px;
+    border: 0;
+    padding: 12px 0;
+    width: 100%;
+    border-radius: 0 0 2px 2px;
+}
+
+/* ----- Chat inferior derecha ----- */
+.chat{
+    position: absolute;
+    height: 300px;
+    width: 225px;
+    background-color: rgb(255, 255, 255);
+    bottom:0px;
+    right:0px;
+    border-style:solid;
+    border-width:thin;
+    border-color: rgb(97, 92, 92);
+    padding: 28px 0 0 0;
+
+    }
+
+.username{
+    position: absolute;
+    height: 20px;
+    width:94%;
+    top: 0%;
+    left: 0%;
+    color: white;
+    padding: 7px;    
+    background-color: rgb(104, 98, 98);
+    
+}
+.button{
+    position: absolute;
+    height: 24px;
+    width: 20%;
+    top: 0%;
+    right: 0%;
+    color: white;
+    margin: 5px;
+}
+
+#minimize{
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    position: absolute;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    color: white;
+    text-align:"center";
+    
+}
+
+.chat-list{
+    position: static;
+    height: 267px;
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    top: 10.5%;
+    left: 0%;
+    margin: 5%;
+    border-color: rgb(97, 92, 92);
+
+}
+
+input.textarea {
+    position: absolute;
+    bottom: 0px;    
+    right: 0px;    
+    height: 20px;
+    width: 224px;
+    z-index: 99;
+    background: #fafafa;
+    border: 2px;
+    outline: none;
+    border-style:solid;
+    border-width:thin;
+    color: #666;
+    font-weight: 400;
+    padding: 0;
+    
+}
