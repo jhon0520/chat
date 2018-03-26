@@ -12,11 +12,14 @@ var NombreUsuario = document.getElementById('Usuario'),
     SalidaPrincipal = document.getElementById('output'),
     SalidaSecundario = document.getElementById('output2'),
     feedback = document.getElementById('feedback'),
-    feedback2 = document.getElementById('feedback2');
+    feedback2 = document.getElementById('feedback2'),
+    NombreDeUsuario = document.getElementById('UserNameChat');
 
 BotonEnviarPrincipal.addEventListener('click', function () {
     console.log("Lo que envia de Usuario: " + NombreUsuario.value);
     console.log("Lo que envia de Mensaje: " + MensajePrincipal.value);
+    //console.log("Nombre de usuario:"+ NombreDeUsuario.value);
+    NombreDeUsuario.innerHTML = NombreUsuario.value;
 
     socket.emit('ChatPrincipal', {
         Usuario: NombreUsuario.value,
