@@ -13,14 +13,13 @@ var NombreUsuario = document.getElementById('Usuario'),
     SalidaSecundario = document.getElementById('output2'),
     feedback = document.getElementById('feedback'),
     feedback2 = document.getElementById('feedback2'),
-    NombreDeUsuario = document.getElementById('UserNameChat');
+    BotonMinimiza = document.getElementById('BotonMinimiza');
 
 BotonEnviarPrincipal.addEventListener('click', function () {
     console.log("Lo que envia de Usuario: " + NombreUsuario.value);
     console.log("Lo que envia de Mensaje: " + MensajePrincipal.value);
     //console.log("Nombre de usuario:"+ NombreDeUsuario.value);
-    NombreDeUsuario.innerHTML = NombreUsuario.value;
-
+    
     socket.emit('ChatPrincipal', {
         Usuario: NombreUsuario.value,
         Mensaje: MensajePrincipal.value
@@ -71,28 +70,24 @@ socket.on('Escribiendo', function (data) {
 
 /* ***** Funcion minimizar ***** */
 
-function MinimizeFunction() {
-
-    var x = document.getElementById('chat-window2');
-    var y = document.getElementById('chat');
-    var z = document.getElementById('Mensaje2');    
-    var q = document.getElementById('user-name');
-    if (x.style.visibility === 'hidden') {
-        x.style.visibility = 'visible';
-        z.style.visibility = 'visible';
-        document.getElementById('Enviar2').style.visibility = 'visible';
-        y.style.height = '300px';
-        q.style.height = '7%';
-
+BotonMinimiza.addEventListener('click', function () {
+    
+    var VentanaPrincipal = document.getElementById('chat-window2')
+        VentanaUsuario = document.getElementById('Chat2'),
+        InputTextChat = document.getElementById('Mensaje2');
+    
+    if (VentanaPrincipal.style.visibility === 'hidden') {
+        VentanaPrincipal.style.visibility='visible';
+        InputTextChat.style.visibility='visible';
+        BotonEnviarSecundario.style.visibility='visible';
+        VentanaUsuario.style.height='400px';
     } else {
-        x.style.visibility = 'hidden';
-        x.style.height = '267px;';
-        y.style.height = '0%';
-        z.style.visibility = 'hidden';
-        document.getElementById('Enviar2').style.visibility = 'hidden';
-        y.style.padding = '0% 0% 0% 0%;';
-        q.style.height = '50%';
-
+        VentanaPrincipal.style.visibility='hidden';
+        InputTextChat.style.visibility='hidden';
+        BotonEnviarSecundario.style.visibility='hidden';
+        VentanaUsuario.style.height='40px';
     }
-}
+
+});
+
 /* *************** */

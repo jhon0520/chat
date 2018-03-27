@@ -76,7 +76,7 @@ input{
 
 #Chat2{
     width: 250px;
-    position: absolute;
+    position: fixed;
     right: 0;
     bottom: 0;
     border: 1px solid #ddd;
@@ -85,16 +85,47 @@ input{
     background: #666;
 }
 
-div#Chat2 h2{
+div#UsuarioMinimiza {
+    background: #666;
+    
+}
+
+div#UsuarioMinimiza h2{
+    width: 210px;
     font-size: 15px;
-    padding: 0px 20px;
+    padding: 12px 20px;
+    margin: 0%;
+    background: #666;
     color: #ffffff;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+}
+
+div#Chat2 button#BotonMinimiza{
+    background-color: #666;
+    /*background-color: Transparent;*/
+    background-repeat:no-repeat;
+    border: none;
+    color: white;
+    position: absolute;
+    margin: 10px 10px;
+    top: 0%;
+    right: 0%;
+}
+
+div#Chat2 button#BotonMinimiza i.material-icons{
+    font-size:15px;
 }
 
 #chat-window2{
     height: 400px;
     overflow: auto;
     background: #f9f9f9;
+}
+
+div#output2 {
+    margin: 40px 0px 0px 0px;
 }
 
 #output2 p{
