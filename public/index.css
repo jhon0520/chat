@@ -1,6 +1,8 @@
 /* ----- Chat Principal ----- */
 
 body{
+    height: 100%;
+    width: 100;;
     font-family: 'Nunito';
 }
 
@@ -85,7 +87,7 @@ input{
 
     }
 
-.username{
+div#user-name{
     position: absolute;
     height: 20px;
     width:94%;
@@ -96,6 +98,12 @@ input{
     background-color: rgb(104, 98, 98);
     
 }
+
+div#user-name p#UserNameChat{
+    size:2% ;
+    margin: 0;
+}
+
 .button{
     position: absolute;
     height: 24px;
@@ -121,8 +129,9 @@ input{
     
 }
 
-.chat-list{
-    position: static;
+.chat-chat-window2{
+    position: relative;
+    overflow: auto;
     height: 267px;
     width: 90%;
     background-color: rgb(255, 255, 255);
@@ -133,12 +142,12 @@ input{
 
 }
 
-input.textarea {
+input#Mensaje2 {
     position: absolute;
     bottom: 0px;    
-    right: 0px;    
-    height: 20px;
-    width: 224px;
+    left: 0px;    
+    height: 30px;
+    width: 180px;
     z-index: 99;
     background: #fafafa;
     border: 2px;
@@ -148,5 +157,26 @@ input.textarea {
     color: #666;
     font-weight: 400;
     padding: 0;
+}
+
+#Enviar2{
+    position: absolute;
+    height: 30px;
+    width: 20%;
+    bottom: 0%;
+    right: 0%;
+    color: white;
     
+}
+
+div#output2 p{
+    padding: 3px 0px;
+    border-bottom: 1px solid #e9e9e9;
+    color: #555;
+}
+
+button#Enviar2 i.material-icons{
+    font-size:20px;
+    color:#666;
+
 }

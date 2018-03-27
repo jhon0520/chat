@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
         io.sockets.emit('ChatSecundario', data);
     });
 
-    // Handle typing event
+    // Escucha si esta escribiendo.
     socket.on('Escribiendo', function(data){
         socket.broadcast.emit('Escribiendo', data);
     });

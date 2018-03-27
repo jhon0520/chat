@@ -73,13 +73,14 @@ socket.on('Escribiendo', function (data) {
 
 function MinimizeFunction() {
 
-    var x = document.getElementById('chat-list');
+    var x = document.getElementById('chat-window2');
     var y = document.getElementById('chat');
-    var z = document.getElementById('Mensaje2');
+    var z = document.getElementById('Mensaje2');    
     var q = document.getElementById('user-name');
     if (x.style.visibility === 'hidden') {
         x.style.visibility = 'visible';
         z.style.visibility = 'visible';
+        document.getElementById('Enviar2').style.visibility = 'visible';
         y.style.height = '300px';
         q.style.height = '7%';
 
@@ -88,6 +89,7 @@ function MinimizeFunction() {
         x.style.height = '267px;';
         y.style.height = '0%';
         z.style.visibility = 'hidden';
+        document.getElementById('Enviar2').style.visibility = 'hidden';
         y.style.padding = '0% 0% 0% 0%;';
         q.style.height = '50%';
 
