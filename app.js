@@ -53,24 +53,30 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('Escribiendo', data);
     });
 
-
-    // Nose que haces!!!
-    var activeNames = [];
-    var usersInRoom = io.sockets.clients();
-    for (var index in usersInRoom) {
-        var userSocketId = (usersInRoom[index].id);
-        if (userSocketId !== socket.id && Nombre[userSocketId]) {
-            var name = Nombre[userSocketId];
-            activeNames.push({ id: NombreUsado.indexOf(name), nick: name });
-        }
-    }
-
+    // ***** --- ***** // 
 
     // Escuchando el usuario escogido
-    socket.on('Nombre de usuario', function (Usuario, Respuesta) {
+    socket.on('Nombre de usuario', function (Usuario) {
 
-        console.log("Indice: " + NombreUsado.indexOf(Usuario));
-        if (NombreUsado.indexOf(Usuario) !== -1) {
+        console.log("Los datos que llegan a NodeJS");
+        console.log(Usuario.Usuario);
+        var Existe = false;
+
+        for (var recorrido=0;recorrido<NombreUsado.length; recorrido++){
+            if(NombreUsado[recorrido] == Usuario.Usuario){
+                console.log("El usuario ya existe");
+                Existe = true;
+            }
+        }
+
+        if (Existe) {
+            console.log("El usuario ya existe");
+        }else{
+            NombreUsado.push(Usuario.Usuario); 
+            console.log("Usuario creado");
+        }
+        
+        /*if (NombreUsado.indexOf(Usuario) !== -1) {
             Respuesta('El Nombre de usuario no esta disponible.');
             return;
         }
@@ -79,7 +85,7 @@ io.on('connection', (socket) => {
         console.log("socket:" + socket);
         console.log("Cliente[Indice] :" + Cliente[Indice]);
         Nombre[socket.id] = Usuario;
-        console.log("Nombre[socket.id] :" + Usuario);
+        console.log("Nombre[socket.id] :" + Usuario);*/
     });
 
     // Escuchando al Mensaje Privado

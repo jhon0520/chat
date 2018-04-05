@@ -27,7 +27,8 @@ var start = document.getElementById("Mensaje2"),
         var key = e.which || e.keyCode;
     
         if (key === 13) {
-               
+        
+            console.log("Lo que envia de Usuario: " + NombreUsuario.value);
             socket.emit('Nombre de usuario', {
                 Usuario: NombreUsuario.value,               
             });
