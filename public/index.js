@@ -15,11 +15,66 @@ var NombreUsuario = document.getElementById('Usuario'),
     feedback2 = document.getElementById('feedback2'),
     BotonMinimiza = document.getElementById('BotonMinimiza');
 
+
+    // Variables 2
+var start = document.getElementById("Mensaje2"),
+    MensajePrivado = document.getElementById('MensajePrivado'),
+    UsuarioPM = document.getElementById('UsuarioPM');
+    // *****
+
+    NombreUsuario.addEventListener('keypress', function (e) {
+
+        var key = e.which || e.keyCode;
+    
+        if (key === 13) {
+               
+            socket.emit('Nombre de usuario', {
+                Usuario: NombreUsuario.value,               
+            });
+            MensajeSecundario.value = "";
+        }
+    
+    });
+
+
+start.addEventListener('keypress', function (e) {
+
+    var key = e.which || e.keyCode;
+
+    if (key === 13) {
+        console.log("Lo que envia de Mensaje: " + MensajeSecundario.value);
+
+        socket.emit('ChatSecundario', {
+            Usuario: NombreUsuario.value,
+            Mensaje: MensajeSecundario.value
+        });
+        MensajeSecundario.value = "";
+    }
+
+});
+
+MensajePrivado.addEventListener('keypress', function (e) {
+
+    var key = e.which || e.keyCode;
+
+    if (key === 13) {
+        console.log("Lo que envia de Mensaje: " + MensajeSecundario.value);
+
+        socket.emit('Mensaje Privado',{
+            UsuarioPM: UsuarioPM.value,
+            MensajePrivado: MensajePrivado.value
+        });
+        MensajePrivado.value = "";
+    }
+
+});
+
+
 BotonEnviarPrincipal.addEventListener('click', function () {
     console.log("Lo que envia de Usuario: " + NombreUsuario.value);
     console.log("Lo que envia de Mensaje: " + MensajePrincipal.value);
     //console.log("Nombre de usuario:"+ NombreDeUsuario.value);
-    
+
     socket.emit('ChatPrincipal', {
         Usuario: NombreUsuario.value,
         Mensaje: MensajePrincipal.value
@@ -71,21 +126,21 @@ socket.on('Escribiendo', function (data) {
 /* ***** Funcion minimizar ***** */
 
 BotonMinimiza.addEventListener('click', function () {
-    
+
     var VentanaPrincipal = document.getElementById('chat-window2')
-        VentanaUsuario = document.getElementById('Chat2'),
+    VentanaUsuario = document.getElementById('Chat2'),
         InputTextChat = document.getElementById('Mensaje2');
-    
+
     if (VentanaPrincipal.style.visibility === 'hidden') {
-        VentanaPrincipal.style.visibility='visible';
-        InputTextChat.style.visibility='visible';
-        BotonEnviarSecundario.style.visibility='visible';
-        VentanaUsuario.style.height='400px';
+        VentanaPrincipal.style.visibility = 'visible';
+        InputTextChat.style.visibility = 'visible';
+        BotonEnviarSecundario.style.visibility = 'visible';
+        VentanaUsuario.style.height = '400px';
     } else {
-        VentanaPrincipal.style.visibility='hidden';
-        InputTextChat.style.visibility='hidden';
-        BotonEnviarSecundario.style.visibility='hidden';
-        VentanaUsuario.style.height='40px';
+        VentanaPrincipal.style.visibility = 'hidden';
+        InputTextChat.style.visibility = 'hidden';
+        BotonEnviarSecundario.style.visibility = 'hidden';
+        VentanaUsuario.style.height = '40px';
     }
 
 });
