@@ -60,6 +60,7 @@ io.on('connection', (socket) => {
 
         console.log("Los datos que llegan a NodeJS");
         console.log(Usuario.Usuario);
+        console.log(socket.id);
         var Existe = false;
 
         for (var recorrido=0;recorrido<NombreUsado.length; recorrido++){
@@ -72,20 +73,12 @@ io.on('connection', (socket) => {
         if (Existe) {
             console.log("El usuario ya existe");
         }else{
-            NombreUsado.push(Usuario.Usuario); 
+            NombreUsado.push(Usuario.Usuario);
+            NombreUsado.push({Usuario, SocketID: socket.id}); 
             console.log("Usuario creado");
+            console.log("Json: "+ NombreUsado);
         }
         
-        /*if (NombreUsado.indexOf(Usuario) !== -1) {
-            Respuesta('El Nombre de usuario no esta disponible.');
-            return;
-        }
-        var Indice = NombreUsado.push(Usuario) - 1;
-        Cliente[Indice] = socket;
-        console.log("socket:" + socket);
-        console.log("Cliente[Indice] :" + Cliente[Indice]);
-        Nombre[socket.id] = Usuario;
-        console.log("Nombre[socket.id] :" + Usuario);*/
     });
 
     // Escuchando al Mensaje Privado

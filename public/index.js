@@ -80,7 +80,15 @@ BotonEnviarPrincipal.addEventListener('click', function () {
         Usuario: NombreUsuario.value,
         Mensaje: MensajePrincipal.value
     });
+
+    console.log("value de nombre de usuario: " + NombreUsuario.value);
+    
+    if(NombreUsuario.value != null){
+        NombreUsuario.readOnly = true;
+    }
+
     MensajePrincipal.value = "";
+    MensajePrincipal.placeholder="Mensaje"
 });
 
 BotonEnviarSecundario.addEventListener('click', function () {
@@ -91,6 +99,7 @@ BotonEnviarSecundario.addEventListener('click', function () {
         Mensaje: MensajeSecundario.value
     });
     MensajeSecundario.value = "";
+    MensajeSecundario.placeholder="Mensaje"
 });
 
 MensajePrincipal.addEventListener('keypress', function () {
