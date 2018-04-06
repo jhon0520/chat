@@ -1,5 +1,5 @@
-var Nombre = {};
-var Cliente = [];
+
+var SocketID = [];
 var NombreUsado = [];
 
 
@@ -58,37 +58,68 @@ io.on('connection', (socket) => {
     // Escuchando el usuario escogido
     socket.on('Nombre de usuario', function (Usuario) {
 
-        console.log("Los datos que llegan a NodeJS");
-        console.log(Usuario.Usuario);
-        console.log(socket.id);
         var Existe = false;
+        var indice = 0;
 
-        for (var recorrido=0;recorrido<NombreUsado.length; recorrido++){
-            if(NombreUsado[recorrido] == Usuario.Usuario){
-                console.log("El usuario ya existe");
+        for (var recorrido = 0; recorrido < NombreUsado.length; recorrido++) {
+            if (NombreUsado[recorrido] == Usuario.Usuario) {
+                indice = recorrido;
                 Existe = true;
             }
         }
 
         if (Existe) {
             console.log("El usuario ya existe");
-        }else{
+        } else {
+            console.log("Usuario creado con el nombre de: " + Usuario.Usuario);
             NombreUsado.push(Usuario.Usuario);
-            NombreUsado.push({Usuario, SocketID: socket.id}); 
-            console.log("Usuario creado");
-            console.log("Json: "+ NombreUsado);
+            SocketID.push(socket.id);
+            console.log("Usuario creado con el nombre de: " + NombreUsado[(Usuario.length) - 1] + "Con el ID: " + SocketID[(SocketID.length) - 1]);
         }
-        
+
+    });
+
+    // Desconxion del usuario
+    socket.on('disconnect', function () {
+
+        var Existe = false;
+        var indice = 0;
+
+        for (var recorrido = 0; recorrido < SocketID.length; recorrido++) {
+            if (SocketID[recorrido] == socket.id) {
+                indice = recorrido;
+                Existe = true;
+            }
+        }
+
+        if (Existe) {
+            console.log("El usuario ya no existe existe y estaba en el indice: " + indice);
+            delete NombreUsado[indice];
+            delete SocketID[indice];
+
+        }
+
     });
 
     // Escuchando al Mensaje Privado
     socket.on('Mensaje Privado', function (data) {
-        console.log("MP NodeJS: " + data);
+        console.log("MP NodeJS: " + JSON.stringify(data));
+        console.log("Usuario : " + data.UsuarioPM);
 
-        var from = Nombre[socket.id];
-        Cliente[data.userToPM].emit('Mensaje Privado', { from: from, msg: data.msg });
+        var Existe = false;
+        var indice = 0;
+
+        for (var recorrido = 0; recorrido < NombreUsado.length; recorrido++) {
+            if (NombreUsado[recorrido] == data.UsuarioPM) {
+                indice = recorrido;
+                Existe = true;
+            }
+        }
+
+        console.log("SocketID : " + SocketID[indice]);
+
+        io.to(SocketID[indice]).emit('Mensaje Privado', data);
     });
-
 
 
 });

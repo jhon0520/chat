@@ -16,26 +16,26 @@ var NombreUsuario = document.getElementById('Usuario'),
     BotonMinimiza = document.getElementById('BotonMinimiza');
 
 
-    // Variables 2
+// Variables 2
 var start = document.getElementById("Mensaje2"),
     MensajePrivado = document.getElementById('MensajePrivado'),
     UsuarioPM = document.getElementById('UsuarioPM');
-    // *****
+// *****
 
-    NombreUsuario.addEventListener('keypress', function (e) {
+// Enviar Usuario para que sea guardado del lado del servidor
+NombreUsuario.addEventListener('keypress', function (e) {
 
-        var key = e.which || e.keyCode;
-    
-        if (key === 13) {
-        
-            console.log("Lo que envia de Usuario: " + NombreUsuario.value);
-            socket.emit('Nombre de usuario', {
-                Usuario: NombreUsuario.value,               
-            });
-            MensajeSecundario.value = "";
-        }
-    
-    });
+    var key = e.which || e.keyCode;
+
+    if (key === 13) {
+        console.log("Lo que envia de Usuario: " + NombreUsuario.value);
+        socket.emit('Nombre de usuario', {
+            Usuario: NombreUsuario.value,
+        });
+        MensajeSecundario.value = "";
+    }
+
+});
 
 
 start.addEventListener('keypress', function (e) {
@@ -43,7 +43,6 @@ start.addEventListener('keypress', function (e) {
     var key = e.which || e.keyCode;
 
     if (key === 13) {
-        console.log("Lo que envia de Mensaje: " + MensajeSecundario.value);
 
         socket.emit('ChatSecundario', {
             Usuario: NombreUsuario.value,
@@ -54,41 +53,59 @@ start.addEventListener('keypress', function (e) {
 
 });
 
+// Enviar mensaje privado
 MensajePrivado.addEventListener('keypress', function (e) {
 
     var key = e.which || e.keyCode;
 
     if (key === 13) {
-        console.log("Lo que envia de Mensaje: " + MensajeSecundario.value);
 
-        socket.emit('Mensaje Privado',{
-            UsuarioPM: UsuarioPM.value,
-            MensajePrivado: MensajePrivado.value
-        });
-        MensajePrivado.value = "";
+        if (UsuarioPM.value != null && UsuarioPM.value != "" && MensajePrivado.value != null && MensajePrivado.value != "") {
+            socket.emit('Mensaje Privado', {
+                Usuario: NombreUsuario.value,
+                UsuarioPM: UsuarioPM.value,
+                MensajePrivado: MensajePrivado.value
+            });
+            SalidaPrincipal.innerHTML += '<p><strong>' + NombreUsuario.value + ': </strong>' + MensajePrivado.value + '</p>';
+            MensajePrivado.value = "";
+        }else{
+            alert("No ingresaste Usuario o un Mensaje (Privado)");
+        }
     }
 
+});
+
+// Lo que llega del socket del Mensaje privado
+socket.on('Mensaje Privado', function (data) {
+    feedback.innerHTML = '';
+    console.log("Lo que llega: " + JSON.stringify(data));
+    console.log("Usuario: " + data.Usuario);
+    console.log("UsuarioPM: " + data.UsuarioPM);
+    console.log("Mensaje: " + data.MensajePrivado);
+    SalidaPrincipal.innerHTML += '<p><strong>' + data.Usuario + ': </strong>' + data.MensajePrivado + '</p>';
+    SalidaSecundario.innerHTML += '<p>' + data.MensajePrivado + '</p>';
 });
 
 
 BotonEnviarPrincipal.addEventListener('click', function () {
     console.log("Lo que envia de Usuario: " + NombreUsuario.value);
     console.log("Lo que envia de Mensaje: " + MensajePrincipal.value);
-    //console.log("Nombre de usuario:"+ NombreDeUsuario.value);
 
-    socket.emit('ChatPrincipal', {
-        Usuario: NombreUsuario.value,
-        Mensaje: MensajePrincipal.value
-    });
+    if (NombreUsuario.value != null && NombreUsuario.value != "" && MensajePrincipal.value != null && MensajePrincipal.value != "") {
 
-    console.log("value de nombre de usuario: " + NombreUsuario.value);
-    
-    if(NombreUsuario.value != null){
         NombreUsuario.readOnly = true;
+
+        socket.emit('ChatPrincipal', {
+            Usuario: NombreUsuario.value,
+            Mensaje: MensajePrincipal.value
+        });
+    }
+    else {
+        alert("No ingresaste usuario o un mensaje ");
     }
 
     MensajePrincipal.value = "";
-    MensajePrincipal.placeholder="Mensaje"
+    MensajePrincipal.placeholder = "Mensaje"
 });
 
 BotonEnviarSecundario.addEventListener('click', function () {
@@ -99,7 +116,7 @@ BotonEnviarSecundario.addEventListener('click', function () {
         Mensaje: MensajeSecundario.value
     });
     MensajeSecundario.value = "";
-    MensajeSecundario.placeholder="Mensaje"
+    MensajeSecundario.placeholder = "Mensaje"
 });
 
 MensajePrincipal.addEventListener('keypress', function () {
